@@ -19,9 +19,23 @@
       margin: 0;
       background: #f3f4f6;
       overflow-x: hidden;
-    }
-
+    }    
     /* ------------ Header / Branding ------------ */
+    
+    .brand-logo {
+      margin-bottom: 0.3rem;
+    }
+    .brand-logo img {
+      height: 64px;
+      max-width: 100%;
+      display: block;
+    }
+    @media (min-width: 768px) {
+      .brand-logo img {
+        height: 80px;
+      }
+    }
+    
     header {
       background: #111827;
       color: #f9fafb;
@@ -329,12 +343,15 @@
   <div class="header-inner">
     <div class="header-top">
       <div>
+        <div class="brand-logo">
+          <img src="alldrive-Logo.png" alt="AllDrive Auto & Marine logo" />
+        </div>
         <h1>AllDrive Tow & Trailer Manager</h1>
-        <p>Track tow vehicles, trailers, maintenance, and towing safety — all in one place.</p>
+        <p>Track tow vehicles, trailers, maintenance, and towing safety, all in one place.</p>
       </div>
       <div>
         <div class="brand-sub">
-          AllDrive Auto &amp; Marine — Veteran-Owned Mobile Mechanic &amp; Trailer Repair | Greenville, TX
+          AllDrive Auto &amp; Marine. USAF Veteran-Owned Mobile Mechanic &amp; Trailer Repair | Greenville, TX
         </div>
         <div class="brand-contact">
           Contact a technician:
