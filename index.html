@@ -1210,8 +1210,26 @@
     saveAll();
   });
 
+// Auto-focus: when you press Enter, go to the next input/textarea
+function setupAutoNext() {
+  const fields = document.querySelectorAll("[data-next]");
+  fields.forEach(field => {
+    field.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault(); // stop the form submitting
+        const nextId = field.dataset.next;
+        if (nextId) {
+          const next = document.getElementById(nextId);
+          if (next) next.focus();
+        }
+      }
+    });
+  });
+}
+  
   // Init
   loadAll();
+  setupAutoNext();
 </script>
 </body>
 </html>
