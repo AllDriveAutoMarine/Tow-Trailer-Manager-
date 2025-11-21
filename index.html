@@ -719,12 +719,15 @@
     <p class="muted">
       Export your vehicles, trailers, and maintenance logs as JSON. Good for backups or sending to AllDrive Auto &amp; Marine.
     </p>
-
+    
     <div class="export-box">
-      <button id="export-btn" class="btn btn-secondary">Export All Data</button>
+      <div class="inline-controls">
+        <button id="export-btn" class="btn btn-secondary">Export JSON</button>
+        <button id="export-csv-btn" class="btn btn-primary">Download CSV (Maintenance)</button>
+      </div>
       <textarea id="export-output" placeholder="Exported JSON will appear here..." readonly></textarea>
     </div>
-
+    
     <h3>Import Data</h3>
     <p class="muted">
       Paste JSON exported from this app and click Import. This will <strong>replace</strong> your current data in this browser.
@@ -741,7 +744,7 @@
 
 <footer>
   <span>&copy; <span id="year-span"></span> AllDrive Auto &amp; Marine.</span>
-  <span>Built for customers and fleets by AllDrive Auto &amp; Marine.</span>
+  <span>Built for customers and fleets maintained by AllDrive Auto &amp; Marine.</span>
 </footer>
 
 <script>
@@ -1233,6 +1236,54 @@
     $("export-output").focus();
     $("export-output").select();
   });
+
+  // Export maintenance logs as a CSV file
+$("export-csv-btn").addEventListener("click", () => {
+  if (!maintLogs.length) {
+    alert("No maintenance entries to export yet.");
+    return;
+  }
+
+  const rows = [];
+  // Header row
+  rows.push(["Type", "Item", "Date", "OdoMiles", "WorkType", "Notes"].join(","));
+
+  maintLogs.forEach(m => {
+    const itemName =
+      m.type === "vehicle"
+        ? (vehicles.find(v => v.id === m.itemId)?.name || "Vehicle")
+        : (trailers.find(t => t.id === m.itemId)?.name || "Trailer");
+
+    const clean = (val) =>
+      (val || "")
+        .toString()
+        .replace(/[\r\n]/g, " ")   // remove newlines
+        .replace(/,/g, " ");       // avoid breaking CSV columns
+
+    const row = [
+      m.type,
+      itemName,
+      m.date || "",
+      m.odo ?? "",
+      clean(m.workType),
+      clean(m.notes),
+    ];
+
+    rows.push(row.join(","));
+  });
+
+  const csv = rows.join("\n");
+  const blob = new Blob([csv], { type: "text/csv" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "alldrive-maintenance.csv";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+});
 
   $("import-btn").addEventListener("click", () => {
     if (!confirm("Importing will replace your current data in this browser. Continue?")) return;
