@@ -21,7 +21,35 @@
       overflow-x: hidden;
     }    
     /* ------------ Header / Branding ------------ */
-    
+    .home-hero {
+  min-height: calc(100vh - 180px); /* full-ish screen minus header/footer */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1rem 0.5rem;
+}
+
+.home-logo {
+  max-width: 260px;
+  width: 70%;
+  height: auto;
+  margin-bottom: 0.75rem;
+}
+
+.home-tagline {
+  font-size: 0.9rem;
+  color: #e5e7eb;
+  margin-bottom: 0.9rem;
+}
+
+.home-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
     .brand-logo {
       margin-bottom: 0.3rem;
     }
@@ -35,7 +63,6 @@
         height: 80px;
       }
     }
-    
     header {
       background: #111827;
       color: #f9fafb;
@@ -367,7 +394,8 @@
     </div>
 
     <div class="nav">
-      <button data-panel="contact" class="active">Contact Technician</button>
+      <button data-panel="home" class="active">Home</button>
+      <button data-panel="contact">Contact Technician</button>
       <button data-panel="diagnostics">Diagnostics</button>
       <button data-panel="maintenance">Maintenance</button>
       <button data-panel="vehicles">Vehicles</button>
@@ -379,9 +407,27 @@
 </header>
 
 <main>
+
+ <!-- HOME PANEL -->
+  <section id="panel-home" class="panel active">
+    <div class="home-hero">
+      <img src="alldrive-logo.png" alt="AllDrive Auto & Marine logo" class="home-logo">
+      <p class="home-tagline">
+        Mobile mechanic & trailer repair · Greenville, TX
+      </p>
+      <div class="home-actions">
+        <button class="btn btn-primary" data-panel-jump="vehicles">
+          Manage Vehicles & Trailers
+        </button>
+        <button class="btn btn-secondary" data-panel-jump="contact">
+          Contact a Technician
+        </button>
+      </div>
+    </div>
+  </section>  
   
   <!-- CONTACT -->
-  <section id="panel-contact" class="panel active">
+  <section id="panel-contact" class="panel">
     <h2>Contact a Technician</h2>
     <p class="muted">
       Need help with diagnosis, trailer setup, or a repair around Greenville, TX?
@@ -1210,6 +1256,26 @@
     saveAll();
   });
 
+// Home page buttons that jump to specific panels
+document.querySelectorAll("[data-panel-jump]").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const target = btn.getAttribute("data-panel-jump");
+    if (!target) return;
+
+    // update nav buttons
+    document.querySelectorAll(".nav button").forEach(b => {
+      b.classList.toggle("active", b.dataset.panel === target);
+    });
+
+    // update panels
+    document.querySelectorAll(".panel").forEach(p => {
+      p.classList.toggle("active", p.id === "panel-" + target);
+    });
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+});
+  
 // Auto-focus: when you press Enter, go to the next input/textarea
 function setupAutoNext() {
   const fields = document.querySelectorAll("[data-next]");
