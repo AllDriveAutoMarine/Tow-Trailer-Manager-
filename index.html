@@ -433,22 +433,22 @@
       <div class="row">
         <div>
           <label>Nickname / Identifier
-            <input type="text" id="veh-name" placeholder="e.g. 2015 F-150 Work Truck" required />
+            <input type="text" id="veh-name" data-next="veh-year" placeholder="e.g. 2015 F-150 Work Truck" required />
           </label>
         </div>
         <div>
           <label>Year
-            <input type="number" id="veh-year" placeholder="2015" />
+            <input type="number" id="veh-year" data-next="veh-make" placeholder="2015" />
           </label>
         </div>
         <div>
           <label>Make
-            <input type="text" id="veh-make" placeholder="Ford" />
+            <input type="text" id="veh-make" data-next="veh-model" placeholder="Ford" />
           </label>
         </div>
         <div>
           <label>Model
-            <input type="text" id="veh-model" placeholder="F-150" />
+            <input type="text" id="veh-model" data-next="veh-tow" placeholder="F-150" />
           </label>
         </div>
       </div>
@@ -456,12 +456,12 @@
       <div class="row">
         <div>
           <label>Max Tow Rating (lbs)
-            <input type="number" id="veh-tow" placeholder="e.g. 9000 (you can Google this)" />
+            <input type="number" id="veh-tow" data-next="veh-curb" placeholder="e.g. 9000 (you can Google this)" />
           </label>
         </div>
         <div>
           <label>Curb Weight (lbs) <span class="muted">(optional)</span>
-            <input type="number" id="veh-curb" placeholder="e.g. 5200 (you can Google this)" />
+            <input type="number" id="veh-curb" data-next="veh-notes" placeholder="e.g. 5200 (you can Google this)" />
           </label>
         </div>
       </div>
@@ -487,12 +487,12 @@
       <div class="row">
         <div>
           <label>Nickname / Identifier
-            <input type="text" id="tr-name" placeholder="e.g. 20ft Car Hauler" required />
+            <input type="text" id="tr-name" data-next="tr-type" placeholder="e.g. 20ft Car Hauler" required />
           </label>
         </div>
         <div>
           <label>Type
-            <input type="text" id="tr-type" placeholder="Utility, Boat, Enclosed, etc." />
+            <input type="text" id="tr-type" data-next="tr-gvwr" placeholder="Utility, Boat, Enclosed, etc." />
           </label>
         </div>
       </div>
@@ -500,17 +500,17 @@
       <div class="row">
         <div>
           <label>GVWR (lbs)
-            <input type="number" id="tr-gvwr" placeholder="e.g. 7000 (you can Google this)" />
+            <input type="number" id="tr-gvwr" data-next="tr-empty" placeholder="e.g. 7000 (you can Google this)" />
           </label>
         </div>
         <div>
           <label>Empty Weight (lbs)
-            <input type="number" id="tr-empty" placeholder="e.g. 2000 (you can Google this)" />
+            <input type="number" id="tr-empty" data-next="tr-axles" placeholder="e.g. 2000 (you can Google this)" />
           </label>
         </div>
         <div>
           <label>Axles
-            <input type="number" id="tr-axles" placeholder="1 or 2" />
+            <input type="number" id="tr-axles" data-next="tr-notes" placeholder="1 or 2" />
           </label>
         </div>
       </div>
@@ -553,7 +553,7 @@
       <div class="row">
         <div>
           <label>Cargo on Trailer (lbs)
-            <input type="number" id="tow-cargo" placeholder="e.g. 3500" />
+            <input type="number" id="tow-cargo" data-next="tow-passengers" placeholder="e.g. 3500" />
           </label>
         </div>
         <div>
@@ -637,12 +637,12 @@
       <div class="row">
         <div>
           <label>Date
-            <input type="date" id="maint-date" required />
+            <input type="date" id="maint-date" required data-next="maint-odo" />
           </label>
         </div>
         <div>
           <label>Odometer / Approx. Miles <span class="muted">(optional)</span>
-            <input type="number" id="maint-odo" placeholder="e.g. 124500" />
+            <input type="number" id="maint-odo" data-next="maint-work" placeholder="e.g. 124500" />
           </label>
         </div>
       </div>
@@ -650,7 +650,7 @@
       <div class="row">
         <div>
           <label>Work Type
-            <input type="text" id="maint-work" placeholder="e.g. Bearing service, brake job" required />
+            <input type="text" id="maint-work" data-next="maint-notes" placeholder="e.g. Bearing service, brake job" required />
           </label>
         </div>
       </div>
